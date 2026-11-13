@@ -1,0 +1,14 @@
+
+{
+  "name": "github-actions-hola-mundo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc hola_mundo.ts --outDir dist --types node",
+    "start": "node dist/hola_mundo.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
