@@ -1,0 +1,45 @@
+
+# Nombre del workflow que aparecerá en GitHub
+name: Hola Mundo con TypeScript
+
+# Evento que activa el workflow
+on: [push]
+
+# Definición de los trabajos
+jobs:
+
+  # Identificador de nuestro job
+  hola-mundo:
+
+    # Máquina donde se ejecutará
+    runs-on: ubuntu-latest
+
+    # Lista de pasos del job
+    steps:
+
+      # Paso 1: Obtener los archivos del repositorio
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      # Paso 2: Preparar Node.js en el runner
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Versión de Node.js que utilizaremos
+          node-version: '24'
+
+      # Paso 3: Instalar las dependencias
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Paso 4: Guardar una variable de entorno
+      - name: Definir usuario
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+
+      # Paso 5: Compilar TypeScript a JavaScript
+      - name: Compilar TypeScript
+        run: npm run build
+
+      # Paso 6: Ejecutar el programa con Node.js
+      - name: Ejecutar Hola Mundo
+        run: npm start
